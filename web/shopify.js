@@ -12,14 +12,18 @@ console.log("HOST_NAME in shopify.js is:", process.env.HOST_NAME); // ✅ debug
 
 const shopify = shopifyApp({
   api: {
+    apiKey: process.env.SHOPIFY_API_KEY,
+    apiSecretKey: process.env.SHOPIFY_API_SECRET,
     apiVersion: LATEST_API_VERSION,
     restResources,
+    hostName: process.env.HOST_NAME, // ✅ correct place
+    isEmbeddedApp: true,
+    billing: undefined,
     future: {
       customerAddressDefaultFix: true,
       lineItemBilling: true,
       unstable_managedPricingSupport: true,
     },
-    billing: undefined,
   },
   auth: {
     path: "/api/auth",
@@ -29,8 +33,6 @@ const shopify = shopifyApp({
     path: "/api/webhooks",
   },
   sessionStorage: new SQLiteSessionStorage(DB_PATH),
-
-  hostName: process.env.HOST_NAME, // 🔥 this will now work
 });
 
 export default shopify;
