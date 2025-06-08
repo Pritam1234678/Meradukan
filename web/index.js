@@ -110,6 +110,7 @@ import serveStatic from "serve-static";
 import shopify from "./shopify.js";
 import productCreator from "./product-creator.js";
 import PrivacyWebhookHandlers from "./privacy.js";
+console.log("HOST_NAME from env:", process.env.HOST_NAME);
 
 // Use PORT from env or fallback to 3000
 const PORT = parseInt(process.env.BACKEND_PORT || process.env.PORT || "3000", 10);
